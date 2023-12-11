@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+// import {NewTaskInput} from "./components/task-input";
+// import {TaskList} from "./components/task-list/task-list";
+// import {Filters} from "./components/filters";
 
-function App() {
+import {useState} from "react";
+import {NewTaskInput} from "./components/task-input";
+
+/**
+ * Creates the main application component.
+ * It renders the NewTaskInput, TaskList and Filters components.
+ */
+export function App() {
+  const [items, setItems] = useState([]);
+
+  const addItem = (value) => {
+    setItems([...items, value]);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <NewTaskInput setItemFn={addItem} />
+      <ul>
+        {items.map(item => <li>{item}</li>)}
+      </ul>
     </div>
-  );
-}
+  )
 
-export default App;
+}
