@@ -1,28 +1,23 @@
-// import {NewTaskInput} from "./components/task-input";
-// import {TaskList} from "./components/task-list/task-list";
-// import {Filters} from "./components/filters";
+import { About } from './pages/about';
+import {Posts} from "./pages/posts";
+import {PostPage} from "./pages/post";
+import {Admin} from "./pages/admin";
+import {Home} from "./pages/home";
+import {ContactPage} from "./pages/contact";
+import {Header} from "./components/hedaer";
+import {Footer} from "./components/footer";
 
-import {useState} from "react";
-import {NewTaskInput} from "./components/task-input";
-
-/**
- * Creates the main application component.
- * It renders the NewTaskInput, TaskList and Filters components.
- */
 export function App() {
-  const [items, setItems] = useState([]);
-
-  const addItem = (value) => {
-    setItems([...items, value]);
-  }
-
   return (
     <div>
-      <NewTaskInput setItemFn={addItem} />
-      <ul>
-        {items.map(item => <li>{item}</li>)}
-      </ul>
+      <Header />
+      <Home />
+      <About />
+      <Posts />
+      <PostPage />
+      <ContactPage />
+      <Admin />
+      <Footer />
     </div>
   )
-
 }
