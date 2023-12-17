@@ -1,18 +1,26 @@
-import {useState} from "react";
+import {useContext, useState} from "react";
+import {BlogContext} from "../providers/blog-provider";
+import {AuthContext} from "../providers/auth-provider";
 
-export function Admin({ onPostSubmit, onClearList }) {
+export function Admin() {
+  const {addPost} = useContext(BlogContext);
+  const {user} = useContext(AuthContext);
+
   const [msg, setMsg] = useState('');
+
+  if(!user) {
+    return <p>You must sign in first!</p>
+  }
 
   const handleNewPostSubmit = (event) => {
     event.preventDefault();
 
     const {title, content} = event.target.elements;
 
-    onPostSubmit({
+    addPost({
       title: title.value,
       content: content.value
     })
-
   }
 
   const handleOnCopy = (event) => {
@@ -35,12 +43,11 @@ export function Admin({ onPostSubmit, onClearList }) {
                  id="title"
                  name="title"
                  type="text"/>
-          <span>{msg}</span>
+            <span>{msg}</span>
           <label htmlFor="content">Content</label>
           <textarea id="content" name="content"/>
           <button type="submit">Create</button>
         </form>
-        <button onClick={onClearList}>CLEAR</button>
       </div>
   );
 }
