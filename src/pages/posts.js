@@ -1,20 +1,20 @@
 import {PostLIst} from "../components/post-list";
-import {useEffect, useState} from "react";
+import {useContext} from "react";
+import {BlogContext} from "../providers/blog-provider";
+import {PostCard} from "../components/post-card";
+
 
 export function Posts() {
-  const [posts, setPosts] = useState([]);
-
-  useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/posts')
-        .then(response => response.json())
-        .then(json => setPosts(json))
-  }, []);
+  const {posts} = useContext(BlogContext);
 
   return (
       <div>
         <h2>Posts: {posts.length}</h2>
         <p>Here is the list of my posts!</p>
-        <PostLIst feed={posts}/>
+        <input className='form-control-lg' />
+        <PostLIst>
+          {posts.map((post) => <PostCard singlePost={post} />)}
+        </PostLIst>
         <button>load more</button>
       </div>
   )
