@@ -1,4 +1,4 @@
-import {useContext, useState} from "react";
+import {useContext, useEffect} from "react";
 import {BlogContext} from "../providers/blog-provider";
 import {AuthContext} from "../providers/auth-provider";
 import {useForm} from "react-hook-form";
@@ -6,7 +6,17 @@ import {useForm} from "react-hook-form";
 export function Admin() {
   const {addPost} = useContext(BlogContext);
   const {user} = useContext(AuthContext);
-  const {previewImage, setPreviewImage} = useState(null);
+  // const {previewImage, setPreviewImage} = useState(null);
+  console.log(navigator.geolocation);
+  useEffect(() => {
+    console.log('I will run every time the array values change')
+
+    // when component "unmount" (leave the DOM)
+    return () => {
+      const result = window.confirm('You will lost everything!')
+    }
+  }, []);
+
 
   const { register, handleSubmit, formState } = useForm();
 

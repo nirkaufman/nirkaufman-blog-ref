@@ -1,9 +1,18 @@
 import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
+import {setSelectionRange} from "@testing-library/user-event/dist/utils";
+
+const post = {
+  title: '',
+  body: '',
+  likes: 1,
+  comments: [],
+  createdAt: Date
+}
 
 export function PostPage() {
   const { id } = useParams();
-  const [post, setPost] = useState(null);
+  const [post, setPost] = useState();
 
   useEffect(() => {
     fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)

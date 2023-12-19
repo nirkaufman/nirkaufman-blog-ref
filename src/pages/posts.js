@@ -1,11 +1,14 @@
 import {PostLIst} from "../components/post-list";
-import {useContext, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {BlogContext} from "../providers/blog-provider";
 import {PostCard} from "../components/post-card";
+import {set} from "react-hook-form";
+
+
 
 
 export function Posts() {
-  const {posts} = useContext(BlogContext);
+  const {posts, setPosts} = useContext(BlogContext);
   const [query, setQuery] = useState('');
 
   const handleUserInput = (evt) => {
@@ -17,6 +20,11 @@ export function Posts() {
   //   const lowerQuery = query.toLowerCase();
   //   return posts.filter(post => post.title.toLowerCase().includes(lowerQuery));
   // }
+
+  useEffect(() => {
+    const string = localStorage.getItem('posts')
+    setPosts(JSON.parse(string))
+  }, []);
 
   return (
       <div>

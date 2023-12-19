@@ -14,9 +14,10 @@ export function BlogProvider({children}) {
 
   const addPost = (post) => {
     setPosts([...posts, post]);
+    localStorage.setItem('posts', JSON.stringify(posts));
   }
 
-  const value = { posts, addPost };
+  const value = { posts, addPost, setPosts };
 
   return (
       <BlogContext.Provider value={value}>
